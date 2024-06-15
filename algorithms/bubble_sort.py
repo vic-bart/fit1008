@@ -31,14 +31,10 @@ Hi! This file defines bubble sort for arrays, a stable sorting algorithm that wo
 
   >>  array = [1, 2, 3, 4, 7, 6, 5, 8, 0, 9]
 
-  - Notice that the array as a whole is not sorted, but the greatest unsorted value is its sorted position (i.e. if the array were sorted, the value would have the same position). 
+  - Notice that the array as a whole is not sorted, but the greatest unsorted value is in its sorted position (i.e. if the array were sorted, the value would have the same position). 
   - In fact, this is an invariant; at the end of each loop, the greatest unsorted value will always be moved to its sorted position. 
-  - This also means the array is partitioned in two -- the lower half contains unsorted values, the upper half contains sorted values. Each loop moves the greatest value from its unsorted position in the lower half, to its sorted position in the upper half.
-  - However, because the upper half will always be made of values greater than all values in the lower half, the sorted position of the lower half's greatest value is always immediately adjacent to the start of the upper half (because this position is less than all the sorted values in the upper half, and greater than all the unsorted values in the lower half).
-  - This means that at the end of each loop, the sorted partition takes one value from the unsorted partition.
-
-
-
+  - And since the values are sorted in descending order, the array is partitioned in two -- the lower half contains unsorted values, the upper half contains sorted values. Each loop moves the greatest value from its unsorted position in the lower half, to its sorted position in the upper half.
+  - However, because the upper half will always be made of values greater than all values in the lower half, the sorted position of the lower half's greatest value is always immediately adjacent to the start of the upper half (because this position is less than all the sorted values in the upper half, and greater than all the unsorted values in the lower half), meaning the sorted partition increases grows by one value each loop, until it includes the whole array.
 """
 def bubble_sort(array:list) -> None:
   
