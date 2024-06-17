@@ -1,5 +1,6 @@
 """
-Hi! This file defines bubble sort for arrays, a stable sorting algorithm that works by traversing an array from the start, to the end where it iteratively accumulates the greatest values. Here's an example:
+Hi! This file defines bubble sort for arrays, a stable sorting algorithm that works by traversing an array from the start, to the end where it iteratively accumulates the greatest values. 
+Here's an example:
 
   >>  array = [3, 1, 2, 9, 4, 7, 6, 5, 8, 0]
 
@@ -13,8 +14,9 @@ Hi! This file defines bubble sort for arrays, a stable sorting algorithm that wo
 
   >>  array = [3, 1, 2, 9, 4, 7, 6, 5, 8, 0]
   
-  array[0] > array[1] == True (3 > 1 == True)
-  swap array[0] with array[1]
+  i = 0
+  array[i] > array[i+1] == True (3 > 1 == True)
+  swap array[i] with array[i+1]
 
   >>  array = [1, 3, 2, 9, 4, 7, 6, 5, 8, 0]
 
@@ -22,7 +24,8 @@ Hi! This file defines bubble sort for arrays, a stable sorting algorithm that wo
 
   >>  array = [1, 2, 3, 9, 4, 7, 6, 5, 8, 0]
 
-  array[2] > array[3] == False (3 > 5 == False)
+  i = 2
+  array[i] > array[i+1] == False (3 > 9 == False)
   do nothing
 
   >>  array = [1, 2, 3, 9, 4, 7, 6, 5, 8, 0]
@@ -51,15 +54,15 @@ The average/worst-case time complexity is O(n^2):
   - This means we never need to iterate over the sorted values; we only iterate over the unsorted values, which decreases by one value each loop. Defining 'n' as the number of values for a given array (i.e. the 
   length of the array):
 
-  n + (n-1) + (n-2) + ... + 3 + 2
+  (n-1) + (n-2) + ... + 2 + 1 + c
 
   - This is similar to a known mathematical series, where n + (n-1) + ... + 2 + 1 = n(n+1) / 2
 
-  (n(n+1) / 2) - 1
+  (n(n+1) / 2) - n + c
 
-  ((n^2+n) / 2) - 1
+  ((n^2+n) / 2) - n + c
 
-  (1/2)n^2 + (1/2)n - 1
+  (1/2)n^2 + (-1/2)n + c
 
   c * n^2 + c * n + c
 
