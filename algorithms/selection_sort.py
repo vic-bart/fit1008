@@ -1,11 +1,15 @@
 """
-Hi! This file defines selection sort for arrays, an unstable sorting algorithm that works by partitioning an array in two, where the lower sorted half iteratively accumulates the minimum values of the upper unsorted half. 
-Note that this is very similar to bubble sort, the main difference being we only swap the desired value after iterating over all other unsorted values (bubble sort swaps the desired value while iterating over all other unsorted values). 
+Hi! This file defines selection sort for arrays, an unstable sorting algorithm that works by partitioning an array in two, where the lower sorted half iteratively accumulates the minimum values of the upper unsorted 
+half. 
+Note that this is very similar to bubble sort, the main difference being we only swap the desired value after iterating over all other unsorted values (bubble sort swaps the desired value while iterating over all 
+other unsorted values). 
 Here's an example:
 
   >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
 
-  - To find the minimum unsorted value, selection sort compares the current minimum unsorted value -- which is initialised to the unsorted value immediately adjacent to the sorted partition -- with every other unsorted value. If a lower value is found, it replaces the current minimum unsorted value. After all unsorted values have been compared, the current minimum unsorted value is guaranteed to be the minimum unsorted value, and is swapped with the unsorted value immediately adjacent to the sorted partition.
+  - To find the minimum unsorted value, selection sort compares the current minimum unsorted value -- which is initialised to the unsorted value immediately adjacent to the sorted partition -- with every other 
+  unsorted value. If a lower value is found, it replaces the current minimum unsorted value. After all unsorted values have been compared, the current minimum unsorted value is guaranteed to be the minimum unsorted 
+  value, and is swapped with the unsorted value immediately adjacent to the sorted partition.
 
   min = i
   for j in (i+1...n):
@@ -37,7 +41,8 @@ Here's an example:
 
   - Notice that the array as a whole is not sorted, but the minimum unsorted value is in its sorted position (i.e. if the array were sorted, the value would have the same position). 
   - In fact, this is an invariant; at the end of each loop, the minimum unsorted value will always be moved to its sorted position. 
-  - And since the values are sorted in ascending order, the array is partitioned in two -- the lower half contains sorted values, the upper half contains unsorted values. Each loop moves the minimum value from its unsorted position in the upper half, to its sorted position in the lower half, extending the sorted partition until it includes the whole array.
+  - And since the values are sorted in ascending order, the array is partitioned in two -- the lower half contains sorted values, the upper half contains unsorted values. Each loop moves the minimum value from its 
+  unsorted position in the upper half, to its sorted position in the lower half, extending the sorted partition until it includes the whole array.
 
 The best/average/worst-case time complexity is O(n^2):
 
