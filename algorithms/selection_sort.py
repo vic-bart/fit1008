@@ -138,7 +138,7 @@ def swap(array:list, i:int, j:int) -> None:
   array[j] = item
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
   
   array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
   print(array)
