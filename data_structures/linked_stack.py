@@ -41,8 +41,6 @@ class LinkedStack():
     return value
 
   def __str__(self) -> str:
-    if self.is_empty():
-      return '[]'
     values:list = []
     node = self.top
     while node.get_link() is not None:
@@ -53,16 +51,16 @@ class LinkedStack():
 if __name__ == "__main__":
 
   linked_stack:LinkedStack = LinkedStack()
-  print(linked_stack)
+  print(linked_stack, len(linked_stack))
   linked_stack.push(1)
   linked_stack.push(3)
   linked_stack.push(2)
-  print(linked_stack)
+  print(linked_stack, len(linked_stack))
   print(linked_stack.peek())
-  print(linked_stack)
+  print(linked_stack, len(linked_stack))
   print(linked_stack.pop())
-  print(linked_stack)
+  print(linked_stack, len(linked_stack))
   linked_stack.pop()
-  print(linked_stack)
+  print(linked_stack, len(linked_stack))
   linked_stack.pop()
-  print(linked_stack)
+  print(linked_stack, len(linked_stack))

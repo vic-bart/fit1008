@@ -31,6 +31,6 @@ if __name__ == "__main__":
   B:Node = Node(2)
   A.set_link(B)
   print(A)
-  print(A.link)
+  print(A.get_link())
   print(B)
-  print(B.link)
+  print(B.get_link())
