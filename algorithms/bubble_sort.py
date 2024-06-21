@@ -1,58 +1,57 @@
 """
-Hi! This file defines bubble sort for arrays, a stable sorting algorithm that works by traversing an array from the start, to the end where it iteratively accumulates the greatest values. 
+Hi! This file defines bubble sort for arrays, a stable sorting algorithm that works by traversing an array from the end, to the start where it iteratively accumulates the minimum unsorted values. 
 Here's an example:
 
-  >>  array = [3, 1, 2, 9, 4, 7, 6, 5, 8, 0]
+  >>  array = [3, 0, 2, 9, 4, 7, 6, 5, 8, 1]
 
-  - To find the greatest value, bubble sort compares immediately adjacent values, shifting the greater value towards the end.
+  - To find the minimum unsorted value, bubble sort compares immediately adjacent values, shifting the smaller value towards the start.
 
-  for i in (0...n):
-    if array[i] > array[i+1]:
-      swap array[i] with array[i+1]
-
-  - See what happens when the current value is greater than the next value.
-
-  >>  array = [3, 1, 2, 9, 4, 7, 6, 5, 8, 0]
+  for i in range(n):
   
-  i = 0
-  array[i] > array[i+1] == True (3 > 1 == True)
-  swap array[i] with array[i+1]
-
-  >>  array = [1, 3, 2, 9, 4, 7, 6, 5, 8, 0]
+    for j in range(n-1...i):
+    
+        if array[j-1] > array[j]:
+        
+          swap(array, j-1, j)
 
   - See what happens when the current value is smaller than the next value.
 
-  >>  array = [1, 2, 3, 9, 4, 7, 6, 5, 8, 0]
+  >>  array = [3, 0, 2, 9, 4, 7, 6, 5, 8, 1]
+  
+  i = 0, j = 9
+  array[8] > array[9] == True (i.e. 8 > 1 == True)
+  swap array[8] with array[9]
 
-  i = 2
-  array[i] > array[i+1] == False (3 > 9 == False)
+  >>  array = [3, 0, 2, 9, 4, 7, 6, 5, 1, 8]
+
+  - See what happens when the current value is greater than or equal to the next value.
+
+  >>  array = [3, 0, 1, 2, 9, 4, 7, 6, 5, 8]
+
+  i = 0, j = 2
+  array[1] > array[2] == False (i.e. 0 > 1 == False)
   do nothing
 
-  >>  array = [1, 2, 3, 9, 4, 7, 6, 5, 8, 0]
+  >>  array = [3, 0, 1, 2, 9, 4, 7, 6, 5, 8]
 
   - This repeats all the way until the end of the list is reached. 
 
-  >>  array = [1, 2, 3, 4, 7, 6, 5, 8, 0, 9]
+  >>  array = [0, 3, 1, 2, 9, 4, 7, 6, 5, 8]
 
-  - Notice that the array as a whole is not sorted, but the greatest unsorted value is in its sorted position (i.e. if the array were sorted, the value would have the same position). 
-  - In fact, this is an invariant; at the end of each loop, the greatest unsorted value will always be moved to its sorted position. 
-  - And since the values are sorted in descending order, the array is partitioned in two -- the lower half contains unsorted values, the upper half contains sorted values. Each loop moves the greatest value from its 
-  unsorted position in the lower half, to its sorted position in the upper half, extending the sorted partition until it includes the whole array.
+  - Notice that the array as a whole is not sorted, but the minimum unsorted value is in its sorted position (i.e. if the array were sorted, the value would have the same position). 
+  - In fact, this is an invariant; at the end of each loop, the minimum unsorted value will always be moved to its sorted position. 
+  - And since the values are sorted in ascending order, the array is partitioned in two -- the lower part contains sorted values, the upper part contains unsorted values. Each loop moves the minimum value from its unsorted position in the upper part, to its sorted position in the lower part, extending the sorted partition until it includes the whole array.
 
 The best-case time complexity is O(n):
 
-  - Recall the invariant -- at the end of each loop, the greatest unsorted value will always be moved to its sorted position. But what if at the end of the loop, no values have been moved? 
-  - Recall that bubble sort compares immediately adjacent values and swaps them if they're in descending order, but if no values have been moved, than each pair of immediately adjacent values must be in ascending 
-  order, and thus the array is already sorted. 
-  - This provides the algorithm with an early exit; if no values have been swapped, the array is sorted and the algorithm terminates. But even if the input array was sorted, the algorithm can only determine it by 
-  iterating over the whole array once, and thus the best-case time complexity is O(n).
+  - Recall the invariant -- at the end of each loop, the minimum unsorted value will always be moved to its sorted position. But what if at the end of the loop, no values have been moved? 
+  - Recall that bubble sort compares pairs of immediately adjacent values and swaps them if they're in descending order, but if no values have been moved, than each pair of immediately adjacent values must be in ascending order, and thus the whole array must be in ascending order, and thus is sorted. 
+  - This provides the algorithm with an early exit; if no values have been swapped, the array is sorted and the algorithm terminates. But even if the input array was sorted, the algorithm can only determine it by iterating over the whole array once, and thus the best-case time complexity is O(n).
 
 The average/worst-case time complexity is O(n^2):
 
-  - Note that because the upper half will always be made of values greater than all values in the lower half, the sorted position of the lower half's greatest value is always immediately adjacent to the start of the 
-  upper half (because this position is less than all the sorted values in the upper half, and greater than all the unsorted values in the lower half).
-  - This means we never need to iterate over the sorted values; we only iterate over the unsorted values, which decreases by one value each loop. Defining 'n' as the number of values for a given array (i.e. the 
-  length of the array):
+  - Note that because the lower part will always be made of values smaller than all values in the upper part, the sorted position of the upper part's minimum value is always immediately adjacent to the lower part (because this position is greater than all the sorted values in the lower part, and smaller than all the unsorted values in the upper part).
+  - This means we never need to iterate over the sorted values; we only iterate over the unsorted values, which decreases by one each loop. Defining 'n' as the number of values for a given array (i.e. the length of the array):
 
   (n-1) + (n-2) + ... + 2 + 1 + c
 
@@ -79,7 +78,7 @@ The best/average/worst-case space complexity is O(1). Here's an explanation:
 
 def bubble_sort(array:list) -> None:
   """
-  A stable sorting algorithm that works by traversing an array from the start, to the end where it iteratively accumulates the greatest values.
+  A stable sorting algorithm that works by traversing an array from the end, to the start where it iteratively accumulates the minimum unsorted values.
 
   Input:
     - array (list)
@@ -102,15 +101,17 @@ def bubble_sort(array:list) -> None:
     - Worst-case
       O(1)
   """
-  for n in range(len(array), 1, -1):
+  n:int = len(array)
+  
+  for i in range(n):
 
     swapped:bool = False
 
-    for i in range(n-1):
+    for j in range(n-1, i, -1):
       
-      if array[i] > array[i+1]:
+      if array[j-1] > array[j]:
 
-        swap(array, i, i+1)
+        swap(array, j-1, j)
         swapped = True
 
     if not swapped:
@@ -148,7 +149,7 @@ def swap(array:list, i:int, j:int) -> None:
 
 if __name__ == "__main__":
   
-  array = [3, 1, 2, 9, 4, 7, 6, 5, 8, 0]
+  array = [3, 0, 2, 9, 4, 7, 6, 5, 8, 1]
   print(array)
   bubble_sort(array)
   print(array)

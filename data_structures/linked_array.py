@@ -24,10 +24,6 @@ class LinkedArray():
     node = self.front
     for _ in range(i):
       node = node.get_link()
-    if node.get_value() is None:
-      self.length += 1
-    if value is None:
-      self.length -= 1
     node.set_value(value)
 
   def __getitem__(self, i:int) -> Any:
