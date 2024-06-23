@@ -1,0 +1,1 @@
+Stuff I learned from FIT1008, Introduction to Computer Science -- taught at Monash University (in 2023, sem 2). When reading my documentation, know that I am not a sadist; I have word-wrap enabled, and while I could manually insert line breaks, they need to be updated as the documentation is updated, and the latter is ever subject-to-change.
