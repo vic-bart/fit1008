@@ -19,8 +19,8 @@ Hi! This file defines bubble sort for arrays, a stable sorting algorithm that wo
     >>  array = [3, 0, 2, 9, 4, 7, 6, 5, 8, 1]
     
     i = 0, j = 9
-    array[8] > array[9] == True (i.e. 8 > 1 == True)
-    swap array[8] with array[9]
+    array[j-1] > array[j] == True (i.e. array[8] > array[9] == 8 > 1 == True)
+    swap array[j-1] with array[j] (i.e. swap array[8] with array[9])
 
     >>  array = [3, 0, 2, 9, 4, 7, 6, 5, 1, 8]
 
@@ -29,7 +29,7 @@ Hi! This file defines bubble sort for arrays, a stable sorting algorithm that wo
     >>  array = [3, 0, 1, 2, 9, 4, 7, 6, 5, 8]
 
     i = 0, j = 2
-    array[1] > array[2] == False (i.e. 0 > 1 == False)
+    array[j-1] > array[j] == False (i.e. array[1] > array[2] == 0 > 1 == False)
     do nothing
 
     >>  array = [3, 0, 1, 2, 9, 4, 7, 6, 5, 8]

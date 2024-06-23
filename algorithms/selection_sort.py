@@ -5,41 +5,72 @@ Hi! This file defines selection sort for arrays, an unstable sorting algorithm t
 
   - Here's an example:
 
-    >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+             >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+      sorted partition = []
+    unsorted partition = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
 
     - To find the minimum unsorted value, selection sort compares the current minimum unsorted value -- which is initialised to the unsorted value immediately adjacent to the sorted partition -- with every other unsorted value. If a lower value is found, it replaces the current minimum unsorted value. After all unsorted values have been compared, the current minimum unsorted value is guaranteed to be the minimum unsorted value, and is swapped with the unsorted value immediately adjacent to the sorted partition.
 
-    min = i
+    for i in (0...n):
 
-    for j in (i+1...n):
-    
-      if array[j] < array[min]:
+      min = i
+
+      for j in (i+1...n):
       
-        min = j
+        if array[j] < array[min]:
         
-    swap(array, i, min)
+          min = j
+          
+      swap(array, i, min)
 
-    - See what happens when an unsorted value is less than the first unsorted value.
+    - See what happens when an unsorted value is less than the current minimum unsorted value.
 
-    >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+             >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+      sorted partition = []
+    unsorted partition = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
 
-    j = 1, min = 0
-    array[j] < array[min] == True (2 < 3 == True)
+    min = 0, j = 1
+    array[j] < array[min] == True (i.e. array[1] < array[0] == 2 < 3 == True)
     min = 1
 
-    >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+             >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+      sorted partition = []
+    unsorted partition = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
 
-    - Note that no values have been swapped. See what happens when the last unsorted value is compared (Note that at this point, the sorted partition is empty, and the unsorted partition includes the whole array).
+    - Note that no values have been swapped. 
 
-    >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+    - See what happens when an unsorted value is greater than the current minimum unsorted value.
 
-    j = n-1, min = 2, i = 0
-    array[j] < array[min] == True (0 < 1 == True)
-    min = n-1
-    j += 1, j == n (exit loop)
-    swap array[i] with array[min]
+             >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+      sorted partition = []
+    unsorted partition = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
 
-    >>  array = [0, 2, 1, 9, 4, 7, 6, 5, 8, 3]
+    min = 2, j = 3
+    array[j] < array[min] == False (i.e. array[3] < array[2] == 9 < 1 == False)
+    do nothing
+
+             >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+      sorted partition = []
+    unsorted partition = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+    
+    - See what happens when the final unsorted value is compared.
+
+             >>  array = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+      sorted partition = []
+    unsorted partition = [3, 2, 1, 9, 4, 7, 6, 5, 8, 0]
+
+    i = 0, min = 2, j = 9
+    array[j] < array[min] == True (i.e. array[9] < array[2] == 0 < 1 == True)
+    min = 9
+
+    i = 0, min = 9, j = 10
+    j == n
+    exit loop
+    swap array[i] with array[min] (i.e. swap array[0] with array[9])
+
+             >>  array = [0, 2, 1, 9, 4, 7, 6, 5, 8, 3]
+      sorted partition = [0]
+    unsorted partition =    [2, 1, 9, 4, 7, 6, 5, 8, 3]
 
     - Notice that the array as a whole is not sorted, but the minimum unsorted value is in its sorted position (i.e. if the array were sorted, the value would have the same position). 
 
@@ -77,7 +108,7 @@ Hi! This file defines selection sort for arrays, an unstable sorting algorithm t
 
                >>  array = [1, 2, 3, 4, 5, 6, 7b, 7a] ([7b, 7a] = unstable, [7a, 7b] = stable)
         sorted partition = [1, 2, 3, 4, 5, 6, 7b, 7a]
-      unsorted partition =
+      unsorted partition = []
 
 The best/average/worst-case time complexity is O(n^2):
 
