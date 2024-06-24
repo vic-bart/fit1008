@@ -1,7 +1,7 @@
 """
-Hi! This file defines selection sort for arrays, an unstable sorting algorithm that works by partitioning an array in two, where the lower sorted part iteratively accumulates the minimum values of the upper unsorted part. 
+Hi! This file defines selection sort for arrays, an unstable sorting algorithm that works by partitioning an array in two, where the lower sorted part iteratively accumulates the minimum values (of the upper unsorted part) in their sorted positions.
 
-  - Recall bubble sort, which sorts an array by swapping the minimum unsorted values into their sorted positions. Selection sort works on the same principle, but attempts to sort more efficiently by minimising the number of swaps as much as possible; rather than incrementally swapping the minimum unsorted value towards its sorted position, selection sort iterates over all unsorted values, finds the minimum unsorted value, and swaps it directly into its sorted position.
+  - Recall bubble sort, which sorts an array by incrementally swapping the minimum unsorted values into their sorted positions. Selection sort works on the same principle, but attempts to sort more efficiently by minimising the number of swaps as much as possible; rather than incrementally swapping the minimum unsorted value towards its sorted position, selection sort iterates over all unsorted values, finds the minimum unsorted value, and swaps it directly into its sorted position.
 
   - Here's an example:
 
@@ -78,7 +78,7 @@ Hi! This file defines selection sort for arrays, an unstable sorting algorithm t
 
     - And since the values are sorted in ascending order, the array is partitioned in two -- the lower part contains sorted values, the upper part contains unsorted values. Each loop moves the minimum value from its unsorted position in the upper part, to its sorted position in the lower part, extending the sorted partition until it includes the whole array.
 
-  - Recall that selection sort attempts to improve upon bubble sort by minimising swaps. But does it succeed? Yes, selection sort is generally more efficient because of fewer swaps being performed, but the time complexity (found below) has not improved. In fact, the best-case time complexity has worsened to O(n^2) (previously O(n)):
+  - Recall that selection sort attempts to improve upon bubble sort by minimising swaps. But does it succeed? Yes, selection sort is technically more efficient because of fewer swaps being performed, but the time complexity (found below) has not improved. In fact, the best-case time complexity has worsened to O(n^2) (previously O(n)):
 
     - In bubble sort, the swapping of immediately adjacent values revealed information about the whole array -- if swaps were performed, there existed a pair of immediately adjacent values that were not in ascending order, and thus the array could not be in ascending order (i.e. not sorted); if no swaps were performed, each pair must be in ascending order, and thus the whole array must be in ascending order (i.e. sorted).
 
@@ -88,7 +88,7 @@ Hi! This file defines selection sort for arrays, an unstable sorting algorithm t
 
   - Additionally, the removal of incremental swapping also makes the algorithm unstable:
 
-    - When the minimum unsorted value is swapped into its sorted position, the original value which existed there prior, is moved into the minimum unsorted value's vacated position.
+    - When the minimum unsorted value is swapped into its sorted position, the original unsorted value which existed there prior, is moved into the minimum unsorted value's vacated position.
 
     - If other values equal to this original value, were previously positioned after the original value, and are now positioned before it, their sorted positions may come before the original value's sorted position, making the algorithm unstable.
 
@@ -98,7 +98,7 @@ Hi! This file defines selection sort for arrays, an unstable sorting algorithm t
         sorted partition = [1, 2, 3]
       unsorted partition =          [7a, 7b, 6, 5, 4]
 
-      - The minimum unsorted value is 4, and it's sorted position is immediately adjacent to the sorted partition.
+      - The minimum unsorted value is 4, and its sorted position is immediately adjacent to the sorted partition.
 
                >>  array = [1, 2, 3, 4, 7b, 6, 5, 7a]
         sorted partition = [1, 2, 3, 4]
@@ -122,6 +122,8 @@ The best/average/worst-case time complexity is O(n^2):
 
   ((n^2+n) / 2) - n + c
 
+  (1/2)n^2 + (1/2)n - n + c
+
   (1/2)n^2 + (-1/2)n + c
 
   c * n^2 + c * n + c
@@ -134,12 +136,12 @@ The best/average/worst-case space complexity is O(1). Here's an explanation:
 
   c
 
-  - The greatest term is a constant value, and thus the time complexity is O(1).
+  - The greatest term is a constant value, and thus the space complexity is O(1).
 """
 
 def selection_sort(array:list) -> None:
   """
-  An unstable sorting algorithm that works by partitioning an array in two, where the lower sorted part iteratively accumulates the minimum values of the upper unsorted part.
+  An unstable sorting algorithm that works by partitioning an array in two, where the lower sorted part iteratively accumulates the minimum values (of the upper unsorted part) in their sorted positions.
 
   Input:
     - array (list)

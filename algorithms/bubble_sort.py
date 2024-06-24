@@ -1,5 +1,6 @@
 """
-Hi! This file defines bubble sort for arrays, a stable sorting algorithm that works by traversing an array from the end, to the start where it iteratively accumulates the minimum unsorted values. 
+Hi! This file defines bubble sort for arrays, a stable sorting algorithm that works by traversing an array from the end, to the start where it iteratively accumulates the minimum values in their sorted positions.
+
   - Here's an example:
 
     >>  array = [3, 0, 2, 9, 4, 7, 6, 5, 8, 1]
@@ -56,7 +57,7 @@ The average/worst-case time complexity is O(n^2):
 
   - Note that because the lower part will always be made of values smaller than all values in the upper part, the sorted position of the upper part's minimum value is always immediately adjacent to the lower part (because this position is greater than all the sorted values in the lower part, and smaller than all the unsorted values in the upper part).
   
-  - This means we never need to iterate over the sorted values; we only iterate over the unsorted values, which decreases by one each loop. Defining 'n' as the number of values for a given array (i.e. the length of the array):
+  - This means we never need to iterate over the sorted values; we only iterate over the unsorted values, which decreases by one after each loop. Defining 'n' as the number of values for a given array (i.e. the length of the array):
 
   (n-1) + (n-2) + ... + 2 + 1 + c
 
@@ -65,6 +66,8 @@ The average/worst-case time complexity is O(n^2):
   (n(n+1) / 2) - n + c
 
   ((n^2+n) / 2) - n + c
+
+  (1/2)n^2 + (1/2)n - n + c
 
   (1/2)n^2 + (-1/2)n + c
 
@@ -78,12 +81,12 @@ The best/average/worst-case space complexity is O(1). Here's an explanation:
 
   c
 
-  - The greatest term is a constant value, and thus the time complexity is O(1).
+  - The greatest term is a constant value, and thus the space complexity is O(1).
 """
 
 def bubble_sort(array:list) -> None:
   """
-  A stable sorting algorithm that works by traversing an array from the end, to the start where it iteratively accumulates the minimum unsorted values.
+  A stable sorting algorithm that works by traversing an array from the end, to the start where it iteratively accumulates the minimum values in their sorted positions.
 
   Input:
     - array (list)
