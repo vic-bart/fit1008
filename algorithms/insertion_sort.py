@@ -1,7 +1,7 @@
 """
-Hi! This file defines insertion sort for arrays, a stable sorting algorithm that works by partitioning an array in two, where the lower sorted part iteratively accumulates values (from the upper unsorted part) in their sorted positions, relative to the sorted partition.
+Hi! This file defines insertion sort for arrays, a stable sorting algorithm that works by partitioning an array in two -- the lower sorted part iteratively accumulates unsorted values from the upper unsorted part, in their sorted positions, relative to the sorted partition.
 
-  - Recall selection sort, which attempted to improve upon bubble sort by minimising swaps, and how this resulted in an unstable algorithm with reduced best-case time complexity. Insertion sort is an alternative approach to the same problem; it attempts to maintain the O(n) best-case time complexity and stability of bubble sort, while minimising swaps for improved efficiency.
+  - Recall selection sort, which attempted to improve upon bubble sort by drastically minimising swaps, resulting in an unstable algorithm with reduced best-case time complexity. Insertion sort is an alternative approach to the same problem; it attempts to maintain the O(n) best-case time complexity and stability of bubble sort, while minimising swaps for improved efficiency.
 
   - Here's an example:
 
@@ -9,7 +9,7 @@ Hi! This file defines insertion sort for arrays, a stable sorting algorithm that
       sorted partition = [3]
     unsorted partition =    [2, 1, 9, 4, 7, 6, 5, 8, 0]
 
-    - The sorted partition is initialised to include the first unsorted value -- when the sorted partition includes only one value, that value by default will be in its sorted position (relative to the sorted partition), because there are no other sorted values to compare it against.
+    - The sorted partition is initialised to include the first unsorted value -- when the sorted partition includes only one value, that value will be in its sorted position (relative to the sorted partition), because there are no other values to compare it against.
 
     - For subsequent iterations, the sorted partition swaps the next unsorted value immediately adjacent to the sorted partition, towards its sorted position (relative to the sorted partition).
 
@@ -17,7 +17,7 @@ Hi! This file defines insertion sort for arrays, a stable sorting algorithm that
     
       j = i - 1
 
-      while (j >= 0) and (array[j] > array[j + 1]):
+      while (j >= 0) and (array[j + 1] < array[j]):
       
         swap(array, j + 1, j)
         j = j - 1
@@ -29,8 +29,11 @@ Hi! This file defines insertion sort for arrays, a stable sorting algorithm that
     unsorted partition =       [1, 9, 4, 7, 6, 5, 8, 0]
 
     i = 2, j = 1
-    (j >= 0) and (array[j] > array[j + 1]) == True (i.e. (1 >= 0) and (array[1] > array[2]) == (1 >= 0) and (3 > 1) == True)
-    swap array[j + 1] and array[j] (i.e. swap array[1] and array[2])
+       (j >= 0) and (array[j + 1] < array[j])
+    == (1 >= 0) and (array[2] < array[1])
+    == (1 >= 0) and (1 < 3)
+    == True
+    swap array[j + 1] and array[j] (i.e. swap array[2] and array[1])
     j = j - 1
 
               >> array = [2, 1, 3, 9, 4, 7, 6, 5, 8, 0]
@@ -38,7 +41,10 @@ Hi! This file defines insertion sort for arrays, a stable sorting algorithm that
     unsorted partition =          [9, 4, 7, 6, 5, 8, 0]
 
     i = 2, j = 0
-    (j >= 0) and (array[j] > array[j + 1]) == True (i.e. (0 >= 0) and (array[0] > array[1]) == (0 >= 0) and (2 > 1) == True)
+       (j >= 0) and (array[j + 1] < array[j])
+    == (0 >= 0) and (array[1] < array[0])
+    == (0 >= 0) and (1 < 2)
+    == True
     swap array[j + 1] and array[j] (i.e. swap array[1] and array[0])
     j = j - 1
 
@@ -46,7 +52,9 @@ Hi! This file defines insertion sort for arrays, a stable sorting algorithm that
       sorted partition = [1, 2, 3]
     unsorted partition =          [9, 4, 7, 6, 5, 8, 0]
 
-    (j >= 0) == False (i.e. (-1 >= 0) == False)
+       (j >= 0)
+    == (-1 >= 0)
+    == False
     do nothing
 
               >> array = [1, 2, 3, 9, 4, 7, 6, 5, 8, 0]
@@ -60,22 +68,25 @@ Hi! This file defines insertion sort for arrays, a stable sorting algorithm that
     unsorted partition =          [9, 4, 7, 6, 5, 8, 0]
 
     i = 3, j = 2
-    (array[j] > array[j + 1]) == False; (3 > 9) == False
+       (array[j + 1] < array[j])
+    == (array[3] < array[2])
+    == (9 < 3)
+    == False
     do nothing
 
               >> array = [1, 2, 3, 9, 4, 7, 6, 5, 8, 0]
       sorted partition = [1, 2, 3, 9]
     unsorted partition =             [4, 7, 6, 5, 8, 0]
 
-    - Notice that when the sorted partition is extended, the next unsorted value must always be incrementally swapped towards a position that maintains the sorted partition's ascending order.
+    - Notice that when the sorted partition is extended, the next unsorted value is incrementally swapped towards a position that maintains the sorted partition's ascending order.
 
-    - In fact, this is an invariant; at the end of each loop, the sorted partition's ascending order will always be maintained; the sorted partition will always be sorted.
+    - In fact, this is an invariant; at the end of each loop, the sorted partition must be in ascending order; must always be sorted.
 
-    - This also means that once the sorted partition is extended to include the whole array, the whole array will be in ascending order, and thus be sorted without requiring additional operations.
+    - This also means that once the sorted partition is extended to include the whole array, the whole array must be in ascending order, and thus be sorted.
 
-  - The reintroduction of incremental swapping makes the algorithm stable:
+  - Note that the use of incremental swapping maintains the algorithm's stability:
 
-    - The sorted position of the next unsorted value is identified once the immediately adjacent sorted values are less than or equal to the next unsorted value, prohibiting violation of the sorted order of equivalent values. 
+    - The next unsorted value is incrementally swapped through the sorted partition until either A) values less than or equal to next unsorted value are found, or B) the start of the array is reached -- the "equal" condition prevents the next unsorted value from swapping with equivalent sorted values, thus preserving the order of equivalent values in the unsorted array.
 
     - Here's an example (consider 6a and 6b as being equivalent to 6; the letters just make it easier to differentiate them):
 
@@ -109,15 +120,15 @@ Hi! This file defines insertion sort for arrays, a stable sorting algorithm that
 
 The best-case time complexity is O(n):
 
-  - Recall that when the sorted partition is extended, the next unsorted value must always be incrementally swapped towards a position that maintains the sorted partition's ascending order. However, if the input array is sorted, then the position of next unsorted value doesn't violate the sorted partition's ascending order, and thus requires no additional swaps.
+  - Recall that when the sorted partition is extended, the next unsorted value is incrementally swapped towards a position that maintains the sorted partition's ascending order. However, if the input array is sorted, then the position of the next unsorted value doesn't violate the sorted partition's ascending order, and thus requires no additional swaps.
 
   - This will hold true for all subsequent unsorted values, meaning the only work performed by selection sort is iterating over the unsorted partition, which takes O(n) time. 
 
 The average/worst-case time complexity is O(n^2):
 
-  - Recall that when the sorted partition is extended, the next unsorted value must always be incrementally swapped towards a position that maintains the sorted partition's ascending order. 
+  - Recall that when the sorted partition is extended, the next unsorted value is incrementally swapped towards a position that maintains the sorted partition's ascending order. 
   
-  - Finding this position could require iterating over all values in the sorted partition, which initially includes one value, and increases by another value after each loop. Defining 'n' as the number of values for a given array (i.e. the length of the array):
+  - Finding this position could require iterating over all values in the sorted partition, which initially includes one value, and increases by another value each loop. Defining 'n' as the number of values for a given array (i.e. the length of the array):
 
   c + 1 + 2 + ... + (n-2) + (n-1)
 
@@ -146,7 +157,7 @@ The best/average/worst-case space complexity is O(1). Here's an explanation:
 
 def insertion_sort(array:list) -> None:
   """
-  A stable sorting algorithm that works by partitioning an array in two, where the lower sorted part iteratively accumulates values (from the upper unsorted part) in their sorted positions, relative to the sorted partition.
+  A stable sorting algorithm that works by partitioning an array in two -- the lower sorted part iteratively accumulates unsorted values from the upper unsorted part, in their sorted positions, relative to the sorted partition.
 
   Input:
     - array (list)
@@ -173,7 +184,7 @@ def insertion_sort(array:list) -> None:
 
     j:int = i - 1
 
-    while (j >= 0) and (array[j] > array[j + 1]):
+    while (j >= 0) and (array[j + 1] < array[j]):
       
       swap(array, j + 1, j)
       j = j - 1

@@ -57,7 +57,7 @@ The average/worst-case time complexity is O(n^2):
 
   - Note that because the lower part will always be made of values smaller than all values in the upper part, the sorted position of the upper part's minimum value is always immediately adjacent to the lower part (because this position is greater than all the sorted values in the lower part, and smaller than all the unsorted values in the upper part).
   
-  - This means we never need to iterate over the sorted values; we only iterate over the unsorted values, which decreases by one after each loop. Defining 'n' as the number of values for a given array (i.e. the length of the array):
+  - This means we never need to iterate over the sorted values; we only iterate over the unsorted values, which decreases by one each loop. Defining 'n' as the number of values for a given array (i.e. the length of the array):
 
   (n-1) + (n-2) + ... + 2 + 1 + c
 

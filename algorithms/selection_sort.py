@@ -104,7 +104,7 @@ Hi! This file defines selection sort for arrays, an unstable sorting algorithm t
         sorted partition = [1, 2, 3, 4]
       unsorted partition =             [7b, 6, 5, 7a]
 
-      - This is the moment where the sorted order of equivalent values is violated; 7a must come before 7b in the sorted array, as it was in the unsorted array. However, this violation will persist.
+      - This is the moment where the order of equivalent values is violated; 7a must come before 7b in the sorted array, as it was in the unsorted array. However, this violation will persist.
 
                >>  array = [1, 2, 3, 4, 5, 6, 7b, 7a] ([7b, 7a] = unstable, [7a, 7b] = stable)
         sorted partition = [1, 2, 3, 4, 5, 6, 7b, 7a]
